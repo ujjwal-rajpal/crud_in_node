@@ -11,7 +11,15 @@ const auth = require('./Authentication');
 const express = require('express');
 const app = express();
 
+// json data
 app.use(express.json());
+
+//urlencoded data
+// app.use(express.urlencoded());   //body-parser deprecated undefined extended: provide extended option index.js:19:17
+app.use(express.urlencoded({extended : true}));
+app.use(express.static('public'));
+// serving static data
+
 
 //creating a middleware for loging
 app.use(log);
