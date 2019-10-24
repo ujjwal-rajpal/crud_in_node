@@ -1,3 +1,9 @@
+// require helmet
+const helmet = require('helmet');
+
+// require morgan
+const morgan = require('morgan');
+
 // require validation module joi
 const Joi = require('@hapi/joi');
 
@@ -17,16 +23,22 @@ app.use(express.json());
 //urlencoded data
 // app.use(express.urlencoded());   //body-parser deprecated undefined extended: provide extended option index.js:19:17
 app.use(express.urlencoded({extended : true}));
-app.use(express.static('public'));
-// serving static data
 
+// serving static data
+app.use(express.static('public'));
 
 //creating a middleware for loging
 app.use(log);
 
-// creating a middle ware for authenticating
+// creating a middleware for authenticating
 
 app.use(auth);
+
+// use helmet
+app.use(helmet());
+
+//use morgan
+app.use(morgan('tiny'));
 
 // random array
 const library = [
