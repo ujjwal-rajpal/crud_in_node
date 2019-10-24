@@ -1,23 +1,24 @@
 // require validation module joi
 const Joi = require('@hapi/joi');
 
+// require logger module
+const log = require('./logger');
+
+// require auth module
+const auth = require('./Authentication');
+
 // require express module
 const express = require('express');
 const app = express();
+
 app.use(express.json());
 
 //creating a middleware for loging
-app.use((req,res,next)=>{
-    console.log("loging");
-    next(); // if i comment it the request get hanging
-});
+app.use(log);
 
 // creating a middle ware for authenticating
 
-app.use((req,res,next)=>{
-    console.log("Authenticating");
-    next(); // if i comment it the request get hanging
-});
+app.use(auth);
 
 // random array
 const library = [
