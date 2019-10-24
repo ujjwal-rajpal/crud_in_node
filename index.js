@@ -5,6 +5,21 @@ const Joi = require('@hapi/joi');
 const express = require('express');
 const app = express();
 app.use(express.json());
+
+//creating a middleware for loging
+app.use((req,res,next)=>{
+    console.log("loging");
+    next(); // if i comment it the request get hanging
+});
+
+// creating a middle ware for authenticating
+
+app.use((req,res,next)=>{
+    console.log("Authenticating");
+    next(); // if i comment it the request get hanging
+});
+
+// random array
 const library = [
     {id : 1, book_name : "python"},
     {id : 2, book_name : "Java"},
