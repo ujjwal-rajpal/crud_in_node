@@ -1,3 +1,6 @@
+// configuration
+const config = require('config');
+
 // require helmet
 const helmet = require('helmet');
 
@@ -20,6 +23,11 @@ const app = express();
 // json data
 app.use(express.json());
 
+// check for envoronment
+// console.log(`node_env: ${process.env.NODE_ENV}`);  //if no environment is set return undefined
+// console.log(`app: ${app.get('env')}`); //if no environment is set returns development
+
+
 //urlencoded data
 // app.use(express.urlencoded());   //body-parser deprecated undefined extended: provide extended option index.js:19:17
 app.use(express.urlencoded({extended : true}));
@@ -38,7 +46,18 @@ app.use(auth);
 app.use(helmet());
 
 //use morgan
-app.use(morgan('tiny'));
+
+//if i want to eneable morgan when env is development
+if(app.get('env') === "development"){
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled');
+}
+
+// Configuration
+console.log(config.get('name'));
+console.log(config.get('Mail.host'));
+console.log(config.get('Mail.password'));
+
 
 // random array
 const library = [
