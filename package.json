@@ -12,9 +12,11 @@
   "dependencies": {
     "@hapi/joi": "^15.0.3",
     "config": "^3.2.4",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "morgan": "^1.9.1",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "pug": "^2.0.4"
   }
 }

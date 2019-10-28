@@ -1,3 +1,5 @@
+// debugging
+const debug = require('debug')('app:start');
 // configuration
 const config = require('config');
 
@@ -50,13 +52,18 @@ app.use(helmet());
 //if i want to eneable morgan when env is development
 if(app.get('env') === "development"){
     app.use(morgan('tiny'));
-    console.log('Morgan enabled');
+    debug('Morgan enabled');
 }
 
 // Configuration
-console.log(config.get('name'));
-console.log(config.get('Mail.host'));
-console.log(config.get('Mail.password'));
+// console.log(config.get('name'));
+// console.log(config.get('Mail.host'));
+// console.log(config.get('Mail.password'));
+
+// use pug
+app.set('view engine','pug'); //  log pug module internally without requiring
+app.set('views','./views'); //optional setting
+
 
 
 // random array
@@ -66,6 +73,13 @@ const library = [
     {id : 3, book_name : "node.js"},
 ];
 
+// call to pug
+    app.get('/',( req, res)=>{
+        res.render('index',{
+            title: 'My Express app',
+            message: "Hello world"
+        });
+    });
 
 //get all request
 app.get('/api/library', (req,res)=>{
